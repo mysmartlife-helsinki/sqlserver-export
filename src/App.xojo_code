@@ -7,6 +7,11 @@ Inherits ConsoleApplication
 		  
 		  mMyApplication.Initialize( args )
 		  
+		  // open database connection
+		  
+		  do
+		  loop until mMyApplication.ConnectDatabase
+		  
 		  Do
 		    DoEvents
 		    // Sit in a loop until Idle returns true
