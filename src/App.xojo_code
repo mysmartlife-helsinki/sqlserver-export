@@ -3,6 +3,9 @@ Protected Class App
 Inherits ConsoleApplication
 	#tag Event
 		Function Run(args() as String) As Integer
+		  do
+		  loop until RegisterPlugins
+		  
 		  mMyApplication = New MyApplication
 		  
 		  mMyApplication.Initialize( args )
