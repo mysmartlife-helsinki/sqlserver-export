@@ -84,6 +84,7 @@ Protected Class MyApplication
 		  dim finalRun as boolean
 		  dim rs as recordset
 		  dim s,sql as string
+		  dim b as double
 		  
 		  sql = "SELECT dbo.Outstations.theLabel AS OSLabel, dbo.StrategyList.theLabel AS PointLabel, dbo.StrategyList.item, dbo.StrategyList.theIndex AS pointID, dbo.PointValue.DataValue, dbo.PointValue.DataTime, dbo.PointValue.DataValueType, dbo.Lans.DeviceType FROM dbo.SiteDetails INNER JOIN dbo.Lans INNER JOIN dbo.Outstations ON dbo.Lans.lanID = dbo.Outstations.lanID ON dbo.SiteDetails.siteID = dbo.Lans.siteID INNER JOIN dbo.StrategyList ON dbo.Outstations.outstationID = dbo.StrategyList.outstationID INNER JOIN dbo.PointValue ON dbo.StrategyList.theIndex = dbo.PointValue.PointID ORDER BY dbo.PointValue.PointID OFFSET "
 		  // offset value goes here
@@ -93,6 +94,16 @@ Protected Class MyApplication
 		  
 		  if dbOffset = floor (rowcount/1000) then
 		    FinalRun = true
+		  end
+		  
+		  // end if completed
+		  
+		  if (dboffset * 1000) > rowcount then
+		    
+		    print "Fetch completed."
+		    
+		    return true
+		    
 		  end
 		  
 		  // calculate progress
@@ -348,6 +359,38 @@ Protected Class MyApplication
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="rowCount"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="headerFinished"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="outfilename"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="String"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="outfilepath"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Text"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="prev"
 			Visible=false
 			Group="Behavior"
 			InitialValue=""
